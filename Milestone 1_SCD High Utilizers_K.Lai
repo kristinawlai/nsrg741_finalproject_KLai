@@ -1,7 +1,7 @@
 ---
-title: "Milestone 1_SCD High Utilizers_K.Lai"
-author: "Kristina Lai"
-date: "2/1/2020"
+title: "Milestone 1: Factors Associated with High Hospital Utilization Among Children with Sickle Cell Disease"
+author: "Kristina Lai (kristina.lai@choa.org"
+date: "February 5, 2020"
 output: html_document
 ---
 
@@ -9,15 +9,41 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Overview and Motivation
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+As part of my work as the sickle cell disease (SCD) epidemiologist at at Children’s Healthcare of Atlanta (CHOA), I conduct an annual program update for the entire SCD program. This annual presentation impacts program planning and staffing for the year, plus it provides us with a bird’s eye view of any patterns in our patients. I have noticed a small but significant increase in the number of patients who are admitted more than 5 times in a given calendar year. In fact, we have seen that 2% of our patient population account for 40% of all hospital admissions, but only in the past 4-5 years. This phenomenon began in 2014 and remains elevated. We have anecdotally heard of similar patterns from SCD programs in California, however little investigation has been done on factors that may be influencing this rise. I originally presented this data on a poster at the American Society of Hematology conference in 2018 and I have been meaning to dig deeper into the factors that may be associated with it and turn it into a manuscript. Because of my position and access to data at CHOA, one of the largest pediatric sickle cell programs in the country, I am uniquely positioned to conduct this analysis and assist our team in identifying and hopefully preventing continued escalation in higher hospital utilizers. 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
-summary(cars)
-```
+## Project Objectives
+
+o	Objective 1: What are the patterns of high hospital utilization in pediatric SCD patients in the 10-year period from 2010-2019? This will help us understand the trends in our patient population. 
+o	Objective 2: Identify factors that may be associated with high hospital utilization, including in patients who are consistent high utilizers vs those who are not. 
+o	These objectives will help us to understand why certain patients develop high utilization and more severe disease than others, and point us to factors that can help identify patients at risk of becoming high utilizers.
+
+## Data
+
+o	I will obtain my data from 2 sources:
+	CHOA’s sickle cell clinical database, a prospectively collected dataset that houses over 100,000 healthcare encounters from over 3,500 pediatric patients from 2010-present. Because this is protected health information, I am not able to provide a link to the dataset. It is IRB exempt and all analyses will be used for quality improvement. 
+	CHOA’s QlikView Discovery system, which pulls data from the electronic medical record. Specifically, I will be looking at ICD-coded discharge diagnoses for each patient encounter. 
+
+## Data Wrangling
+
+o	The healthcare utilization data is largely clean, but I will need to link it to the ICD code data based on unique visit ID number and patient ID. This may require reshaping of either dataset. 
+o	Because the ICD coded data is generated from discreet variables in the EHR, I do not anticipate much data cleaning. 
+o	For each patient, I will be calculating several fields:
+	Total number of visits per patient per year
+	Total admissions in each categorized discharge diagnosis per patient per year
+	Emergency Department Dependency Ratio (EDR) for each patient per year (EDR = # ED visits / Total of ED and outpatient visits)
+	Total years with 5+ admissions per patient, including whether they were consecutive years
+
+## Exploratory Analysis
+
+o	Line graph and/or histogram to visually assess trends over time
+o	Logistic regression to assess whether factors in a given year (or the year prior) are associated with high utilization
+
+## Analysis
+
+
 
 ## Including Plots
 
