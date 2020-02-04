@@ -91,7 +91,7 @@ My analysis will be conducted in R Studio and R Markdown. Once my dataset is cle
 \endgroup
 
 
-### Potential Tables and Figures
+### Potential Tables and Figures 
 
 **Table 1: Patient Demographics**
 
@@ -100,6 +100,7 @@ My analysis will be conducted in R Studio and R Markdown. Once my dataset is cle
   SCD Genotype | Number | %
   Sex | Number | %
   Race/ethnicity | Number | %
+  Etc. |  | 
 
 
 **Table 2: Utilization Characteristics**
@@ -107,9 +108,8 @@ My analysis will be conducted in R Studio and R Markdown. Once my dataset is cle
 **Characteristic** | **Value** | **Percent**
 ----------------- | -------- | -----------
   Discharge Diagnosis (categorized) | Number | %
-  Campus | Number | %
   Average number of hospitalizations per year | Number | %
-  
+  Etc. |  |   
 
 **Table 3: Number of Patients by Age Group** 
 
