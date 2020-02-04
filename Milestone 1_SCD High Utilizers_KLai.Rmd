@@ -6,8 +6,6 @@ author: "**Kristina Lai
 date: "February 5, 2020"
 output:
   pdf_document: default
-  word_document: default
-  html_document: default
 ---
 
 ```{r setup, include=FALSE}
