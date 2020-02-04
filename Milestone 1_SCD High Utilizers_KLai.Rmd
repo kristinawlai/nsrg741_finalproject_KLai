@@ -1,0 +1,160 @@
+---
+title: '**Milestone 1: Factors Associated with High Hospital Utilization Among Children
+  with Sickle Cell Disease**'
+author: "**Kristina Lai  
+        (kristina.lai@choa.org)**"
+date: "February 5, 2020"
+output:
+  pdf_document: default
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+# set up knitr options for all code chunks
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(error = FALSE)
+
+# load packages needed for code chunks
+library(readr)
+library(tibble)
+library(dplyr)
+library(ggplot2)
+library(tinytex)
+```
+
+## Overview and Motivation
+
+As part of my work as the sickle cell disease (SCD) epidemiologist at Children’s Healthcare of Atlanta (CHOA), I conduct an annual clinic volumes and utilization update for the entire SCD program. This annual presentation impacts program planning and physician staffing for the year, plus it provides us with a bird’s eye view of any patterns in our patients. I have noticed a small but significant increase in the number of patients who are admitted more than 5 times in a given calendar year. In fact, we have seen that 2% of our patient population account for 40% of all hospital admissions, but only in the past 4-5 years. This phenomenon began in 2014 and remains elevated. We have anecdotally heard of similar patterns from SCD programs in California, however little investigation has been done on factors that may be influencing this rise. I originally presented this data on a poster at the American Society of Hematology conference in 2018 and I have been meaning to dig deeper into the factors that may be associated with it and turn it into a manuscript. Because of my position and access to data at CHOA, one of the largest pediatric sickle cell programs in the country, I am uniquely positioned to conduct this analysis and assist our team in identifying and hopefully preventing continued escalation in higher hospital utilizers. 
+
+
+## Project Objectives
+
+The following objectives will help us to understand why certain patients develop high utilization and more severe disease than others, and point us toward factors that can help identify patients at risk of becoming high utilizers.
+
+*	Objective 1: What are the patterns of high hospital utilization in pediatric SCD patients in the 10-year period from 2010-2019? This will help us understand the trends in our patient population. 
+*	Objective 2: Which factors may be associated with and/or predict high hospital utilization?  Does this differ in patients who are consistent high utilizers vs those who are not?
+
+
+## Data
+
+I will obtain my data from two sources, both of which I already have access to:
+
+*	CHOA’s sickle cell clinical database, a prospectively collected dataset that houses over 100,000 healthcare encounters from over 3,500 pediatric patients from 2010-present. Because this is protected health information, I am not able to provide a link to the dataset. It is IRB exempt and all analyses will be used for quality improvement. 
+*	CHOA’s QlikView Discovery system, which pulls discrete data fields from the electronic medical record. Specifically, I will be looking at ICD-coded discharge diagnoses for each patient encounter and potentially additional factors.  
+
+## Data Wrangling
+
+Because my dataset has largely been cleaned already, I don't expect extensive data wrangling. I anticipate needing to create new variables by adding up each encounter. If possible I will do this using pipes ("%>%"). I expect to complete the following actions: 
+
+* I will need to link my healthcare utilization dataset to the ICD code data based on unique visit ID number and patient ID. This may require reshaping of either dataset. 
+* Because the ICD coded data is generated from discreet variables in the EHR, I do not anticipate much data cleaning. 
+*	For each patient, I will be calculating several fields, including but not limited to:
+    1. Total number of visits per patient per year
+    2. Total admissions in each categorized discharge diagnosis per patient per year
+    3. Emergency Department Dependency Ratio (EDR) for each patient per year  
+    (EDR = # ED visits / Total of ED and outpatient visits)
+    4. Total years with 5+ admissions per patient, including whether they were consecutive years
+    
+
+## Exploratory Analysis
+
+I will use standard approaches to explore my data, including general frequencies and correlations between variables. This will be done by simply looking at decriptive statistics and by creating several visualizations, including but not limited to frequencies, correlations, basic visualizations like line graphs, histograms, and scatterplots, as well as any other methods needed. 
+
+## Analysis
+
+My analysis will be conducted in R Studio and R Markdown. Once my dataset is cleaned and properly structured, I will use methods such as logistic regression to understand which factors are significant predictors of high utilization. See my tentative workplan below: 
+
+### Final Project Workplan
+
+\begingroup\small
+**Week** | **Class Date** | **Assignments Due** | **Project Plan**
+---- | ---------- | ---------------- | ---------------------------------- 
+1 | 1/15/2020 | - | -
+2 | 1/22/2020 | - | -
+3 | 1/29/2020 | HW 1 due (Now Feb 5) | -
+4 | 2/5/2020 | Project Milestone 1 Due | Submit proposal
+5 | 2/12/2020 | HW 2 due | Obtain both datasets and begin reshaping the datasets as needed
+6 | 2/19/2020 | HW 3 due | Continue data cleaning and create new summary variables with counts of encounters, etc
+7 | 2/26/2020 | - | Begin exploratory analysis with clean dataset
+8 | 3/4/2020 | HW 4 due | Determine final analysis methods
+9 | 3/11/2020 | Spring Break | Begin write up and draft prototype
+10 | 3/18/2020 | HW 5 due | Continue with analysis and finalize prototype (Milestone 2)
+11 | 3/25/2020 | Project Milestone 2 Due | Submit prototype
+12 | 4/1/2020 | HW 6 due | Make any adjustments to analysis as needed
+13 | 4/8/2020 | HW 7 due | Finalize figures and tables
+14 | 4/15/2020 | HW 8 due | Finalize paper
+15 | 4/22/2020 | - | Finalize slides
+16 | 4/29/2020 | Project Milestone 3 Due (Paper AND slides) | Present final findings
+\endgroup
+
+
+### Potential Tables and Figures
+
+**Table 1: Patient Demographics**
+
+**Charachteristic** | **Value** | **Percent**
+----------------- | -------- | -----------
+  SCD Genotype | Number | %
+  Sex | Number | %
+  Race/ethnicity | Number | %
+
+
+**Table 2: Utilization Characteristics**
+
+**Charachteristic** | **Value** | **Percent**
+----------------- | -------- | -----------
+  Discharge Diagnosis (categorized) | Number | %
+  Campus | Number | %
+  Average number of hospitalizations per year | Number | %
+  
+
+**Table 3: Number of Patients by Age Group** 
+
+**Age Group** | **2015** | **2016** | **2017** | **2018** | **2019**
+- | - | - | - | - | - |
+*<1 year* | n(%) | n(%) | n(%) | n(%) | n(%) | n(%) | 
+*1-4 years* |   |   |   |   |   |   | 
+*5-8 years* |   |   |   |   |   |   | 
+*9-12 years* |   |   |   |   |   |   | 
+*13-16 years* |   |   |   |   |   |   | 
+*17+ years* |   |   |   |   |   |   | 
+
+
+
+**Table 4: Number of Admissions by Age Group**
+
+**Age Group** | **2015** | **2016** | **2017** | **2018** | **2019**
+- | - | - | - | - | - |
+*<1 year* | n(%) | n(%) | n(%) | n(%) | n(%) | n(%) | 
+*1-4 years* |   |   |   |   |   |   | 
+*5-8 years* |   |   |   |   |   |   | 
+*9-12 years* |   |   |   |   |   |   | 
+*13-16 years* |   |   |   |   |   |   | 
+*17+ years* |   |   |   |   |   |   | 
+
+
+**Table 5: Logistic Regression Results and Coefficients**
+
+**Variable** | **Coefficient** | **OR** | **p-value**
+- | - | - | - |
+  |   |   |   |
+  |   |   |   |
+  |   |   |   |
+
+
+
+**Figure 1: Graph of High Utilizers Over Time**  
+  
+  
+  
+**Figure 2: Scatterplot of Patient Factors and High Utilization**
+
+
+
+
+
+
+
