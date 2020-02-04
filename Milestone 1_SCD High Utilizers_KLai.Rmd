@@ -27,7 +27,7 @@ library(tinytex)
 
 ## Overview and Motivation
 
-As part of my work as the sickle cell disease (SCD) epidemiologist at Children’s Healthcare of Atlanta (CHOA), I conduct an annual clinic volumes and utilization update for the entire SCD program. This annual presentation impacts program planning and physician staffing for the year, plus it provides us with a bird’s eye view of any patterns in our patients. I have noticed a small but significant increase in the number of patients who are admitted more than 5 times in a given calendar year. In fact, we have seen that 2% of our patient population account for 40% of all hospital admissions, but only in the past 4-5 years. This phenomenon began in 2014 and remains elevated. We have anecdotally heard of similar patterns from SCD programs in California, however little investigation has been done on factors that may be influencing this rise. I originally presented this data on a poster at the American Society of Hematology conference in 2018 and I have been meaning to dig deeper into the factors that may be associated with it and turn it into a manuscript. Because of my position and access to data at CHOA, one of the largest pediatric sickle cell programs in the country, I am uniquely positioned to conduct this analysis and assist our team in identifying and hopefully preventing continued escalation in higher hospital utilizers. 
+As part of my work as the sickle cell disease (SCD) epidemiologist at Children’s Healthcare of Atlanta (CHOA), I conduct an annual clinic volumes and utilization update for the entire SCD program. This annual presentation impacts program planning and physician staffing for the year, plus it provides us with a bird’s eye view of any patterns in our patients. I have noticed a small but significant increase in the number of patients who are admitted more than 5 times in a given calendar year. In fact, we have seen that 2% of our patient population account for 40% of all hospital admissions, but only in the past 4-5 years. This phenomenon began in 2014 and remains elevated. We have anecdotal evidence of similar patterns from SCD programs in California, however little investigation has been done on factors that may be influencing this rise. I originally presented this data on a poster at the American Society of Hematology conference in 2018 and I have been meaning to dig deeper into the factors that may be associated with it and turn it into a manuscript. Because of my position and access to data at CHOA, one of the largest pediatric sickle cell programs in the country, I am uniquely positioned to conduct this analysis and assist our team in identifying and hopefully preventing continued escalation in higher hospital utilizers. 
 
 
 ## Project Objectives
@@ -61,13 +61,13 @@ Because my dataset has largely been cleaned already, I don't expect extensive da
 
 ## Exploratory Analysis
 
-I will use standard approaches to explore my data, including general frequencies and correlations between variables. This will be done by simply looking at decriptive statistics and by creating several visualizations, including but not limited to frequencies, correlations, basic visualizations like line graphs, histograms, and scatterplots, as well as any other methods needed. 
+I will use standard approaches to explore my data, including general frequencies and correlations between variables. This will be done by simply looking at descriptive statistics and by creating several visualizations, including but not limited to frequencies, correlations, basic visualizations like line graphs, histograms, and scatter plots, as well as any other methods needed. 
 
 ## Analysis
 
-My analysis will be conducted in R Studio and R Markdown. Once my dataset is cleaned and properly structured, I will use methods such as logistic regression to understand which factors are significant predictors of high utilization. See my tentative workplan below: 
+My analysis will be conducted in R Studio and R Markdown. Once my dataset is cleaned and properly structured, I will use methods such as logistic regression to understand which factors are significant predictors of high utilization. See my tentative work plan below: 
 
-### Final Project Workplan
+### Final Project Work plan
 
 \begingroup\small
 **Week** | **Class Date** | **Assignments Due** | **Project Plan**
@@ -95,7 +95,7 @@ My analysis will be conducted in R Studio and R Markdown. Once my dataset is cle
 
 **Table 1: Patient Demographics**
 
-**Charachteristic** | **Value** | **Percent**
+**Characteristic** | **Value** | **Percent**
 ----------------- | -------- | -----------
   SCD Genotype | Number | %
   Sex | Number | %
@@ -104,7 +104,7 @@ My analysis will be conducted in R Studio and R Markdown. Once my dataset is cle
 
 **Table 2: Utilization Characteristics**
 
-**Charachteristic** | **Value** | **Percent**
+**Characteristic** | **Value** | **Percent**
 ----------------- | -------- | -----------
   Discharge Diagnosis (categorized) | Number | %
   Campus | Number | %
@@ -150,7 +150,7 @@ My analysis will be conducted in R Studio and R Markdown. Once my dataset is cle
   
   
   
-**Figure 2: Scatterplot of Patient Factors and High Utilization**
+**Figure 2: Scatter plot of Patient Factors and High Utilization**
 
 
 
