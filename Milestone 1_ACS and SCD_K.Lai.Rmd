@@ -2,7 +2,9 @@
 title: "Viral Infections and Acute Chest Syndrome Among Patients with Sickle Cell Disease"
 author: "Kristina Lai (kristina.lai@emory.edu)"
 date: "February 5, 2020"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
