@@ -1,0 +1,174 @@
+---
+title: '**Milestone 2: Factors Associated with High Hospital Utilization Among Children
+  with Sickle Cell Disease**'
+author: '**Kristina Lai (kristina.lai@choa.org)**'
+date: "March 30, 2020"
+output:
+  word_document: default
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+# set up knitr options for all code chunks
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(error = FALSE)
+
+# load packages needed for code chunks
+library(readr)
+library(tibble)
+library(dplyr)
+library(ggplot2)
+library(tinytex) 
+library(table1)
+library(Formula)
+library(tableone)
+library(readxl)
+library(xtable)
+library(papeR)
+library(knitr)
+library(dlookr)
+library(summarytools)
+```
+
+```{r import}
+#Import SCD Registry Dataset
+
+
+Cleaned_dataset <- read_excel("~/NSRG 741 Final Project/N741_ProjectWorkspace-kristinawlai/hiddenfiles/Cleaned dataset_2020 03 30.xlsx")
+View(Cleaned_dataset)
+
+```
+
+#### GitHub repository: https://github.com/Emory-NRSG-741-Spring-2020/N741_ProjectWorkspace-kristinawlai/tree/master/Milestone%202
+
+## Project Background
+As the sickle cell disease (SCD) epidemiologist at Children’s Healthcare of Atlanta
+(CHOA), there has been a small but significant increase in the number of patients who are admitted more than 5 times in a given calendar year. In fact, 2% of our patient population accounts for 40% of all hospital admissions, but only in the past 4-5 years. This phenomenon began in 2014 and remains elevated. We have anecdotal evidence of similar patterns from SCD programs in California, however little investigation has been done on factors that may be influencing this rise. I originally presented this data on a poster at the American Society of Hematology conference in 2018. This project aims to expand on this previous work by identifying and hopefully preventing continued escalation in higher hospital utilizers.
+
+My objectives did not change from my original proposal in Milestone 1. However, I will be subsetting the data to only look at 2 years (2018-2019) for the exploratory analysis and then will be expanding to the full 10 years of data in the final analysis. 
+
+
+### Total Sickle Cell Patients by Year (2010-2019)
+
+**Year**|**Total Patients**
+:-----:|:-----:
+2010|1596
+2011|1678
+2012|1707
+2013|1783
+2014|1773
+2015|1802
+2016|1877
+2017|1914
+2018|1956
+2019|2046
+
+
+## Data acquisition and cleaning
+Data was acquired from the CHOA SCD Clinical Database for years 2010-2019. It was then subset to years 2018-2019 for exploratory analysis. The data was previously cleaned for other projects, however I cleaned several missing values for dichotomous variables (bmt_yn, deceased_yn). Specifically, I changed missing values to ‘0’ when I was sure that they were not actually missing. 
+
+Because the categorical variables were stored in numeric codes, I applied formats in SAS before exporting the final dataset. The original coding was as follows:
+
+**Value**|**Genotype **
+:-----:|:-----:
+1|SS
+2|S BETA ZERO THAL
+3|SS OR S BETA ZERO THAL
+4|S BETA PLUS THAL
+5|SC
+6|SD
+7|SE
+8|S O-ARAB
+9|SC HARLEM
+10|S HPFH
+11|FS
+12|SV - OTHER
+99|NON SCD
+
+
+## Inclusion/Exclusion
+The original dataset had 3,778 unique patients in our sickle cell registry. However, I needed to exclude several patients based on various criteria. First, I removed any patients who were non-sickle cell. These patients may have mistakenly been added to the database and should be excluded. Secondly, our database has utilization data from 2010 to present, however, we have patients in our registry who were only active before that time. Because of that, only patients with at least one encounter between 2010-2019 were included (n=3,619 patients). Additionally, I excluded all encounters occurring after a curative bone marrow transplant (BMT) as well as encounters occurring 21 days prior to the transplant date in order to avoid bias from extended hospital admissions for BMT. The final cohort included 3,595 patients with a total of 117,239 encounters. When I limited the dataset to only years 2018-2019, there were 2,306 unique patients with 25,692 encounters.
+
+## Exploring the Data
+
+To explore the initial dataset, I restricted the full 10-year cohort to only patients and encounters in 2018-2019 (as described above).
+
+```{r data1}
+# SUbset dataset to only years 2018 and 2019 for this exploratory analysis.
+subset<- filter(Cleaned_dataset, dsch_year > 2017)
+
+```
+
+I also wanted to look at all of the objects and determine what class theur were (i.e. numeric, charachter, etc).
+
+```{r objects}
+
+str(subset)
+```
+
+Next, I wanted to look at each variable to get a feel for types and means, followed by looking at the frequencies of categorical variables.
+
+```{r explore}
+
+#Look at all variables
+summary(subset)
+
+#Look at the frequencies of categorical variables
+#Genotype
+freq(subset, var=genotype_char,  report.nas = FALSE, 
+     cumul = FALSE)
+
+#Sex
+freq(subset, var=sex_char,  report.nas = FALSE, 
+     cumul = FALSE)
+
+#Deceased
+freq(subset, var=deceased_yn,  report.nas = FALSE, 
+     cumul = FALSE)
+
+```
+
+I also wanted to look at plots of the vairables to understand their general distributions.
+
+```{r plots}
+attach(subset)
+
+ggplot(subset) + geom_bar(aes(x=sex_char, fill=sex_char)) + ggtitle("Sex")
+
+ggplot(subset) + geom_col(aes(x=genotype_char, y=IPvisit, fill=genotype_char)) +ggtitle("Admissions by Genotype")
+
+test <- subset(subset,IPvisit >=1)
+ggplot(test, aes(x=sex_char, y=IPvisit)) + geom_boxplot() +ggtitle("Admissions by Sex")
+
+ggplot(subset) + geom_bar(aes(x=IPvisit))+ ggtitle("Admissions")
+
+ggplot(subset) + geom_bar(aes(x=IP_ACS)) + ggtitle("Admissions for Acute Chest Syndrome")
+
+ggplot(subset) + geom_bar(aes(x=IP_pain)) +ggtitle("Admissions for Pain")
+
+ggplot(subset) + geom_bar(aes(x=OPvisit)) + ggtitle("Outpatient Clinic Visits")
+
+ggplot(subset) + geom_bar(aes(x=EDany)) + ggtitle("ED Visits (admitted or discharged home)")
+
+ggplot(subset) + geom_bar(aes(x=los)) +ggtitle("Length of Stay")
+
+
+```
+
+
+## Final Analysis Plan
+
+Based on my exploratory analysis, I think I will be able to continue my original analysis plan. I was having trouble with assigning age groups and utilization groups in R, so I will likely go back and continue that in SAS if I can't figure it out. I believe that I will still be able to answer my original questions, or at least get close to it. My plan is to continue the analysis once we learn more about regressions and the more advanced techniques. Because I am familair with this type of health services data in SAS, the biggest challenge is to do the same data cleaning and manipulation tasks in R. I was also having trouble with knitting to PDF for this assignment, even though I was able to do it for previous homework assignments. 
+
+### Final Project Objectives
+The following objectives remain relevant and will help us to understand why certain patients develop high utilization and more severe disease than others, and point us toward factors that can help identify patients at risk of becoming high utilizers. 
+
+* Objective 1: What are the patterns of high hospital utilization in pediatric SCD patients in the 10-year period from 2010-2019? This will help us understand the trends in our patient population.
+* Objective 2: Which factors may be associated with and/or predict high hospital utilization? Does this differ in patients who are consistent high utilizers vs those who are not?
+
+Additional questions that I may explore if time permits are whether there should be more variables included in this analysis to strengthen it and improve the final model(s). 
+
